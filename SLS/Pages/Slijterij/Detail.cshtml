@@ -1,0 +1,34 @@
+﻿@page "{whiskyId:int}"
+
+
+@model SLS.Pages.Slijterij.DetailModel
+@{
+    ViewData["Title"] = "Detail";
+    var photoPath = "~/images/" + (Model.Whisky.PhotoPath ?? "noimage.jpg");
+}
+
+<div>
+    <img class="imageThumbnail" src="@photoPath" asp-append-version="true" />
+</div>
+
+<h2>@Model.Whisky.Name</h2>
+<div>Leeftijd: @Model.Whisky.Age</div>
+<div>Locatie: @Model.Whisky.Location</div>
+<div>Percentage: @Model.Whisky.AlcoholPercentage %</div>
+<div>Type: @Model.Whisky.Type</div>
+<p></p>
+<div>Price: @Model.Whisky.Price</div>
+<div>Stock: @Model.Whisky.Stock</div>
+<p></p>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<a asp-page="./List" class="btn btn-secondary">All Restaurants</a>
+
+@if (Model.Message != null)
+{
+    <a asp-page="./Edit" class="btn btn-secondary">Add New Whisky</a>
+}

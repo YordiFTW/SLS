@@ -1,0 +1,18 @@
+﻿@page "{whiskyId}"
+@model SLS.Pages.Slijterij.DeleteModel
+@{
+    ViewData["Title"] = "Whiskies";
+}
+
+<!DOCTYPE html>
+
+
+<h2>Delete!</h2>
+<div class="alert alert-danger">
+    Are you sure you want to delete @Model.Whisky.Name?
+</div>
+<form method="post">
+    <button type="submit" class="btn btn-danger">Yes!</button>
+    <a asp-page="List" class="btn btn-secondary">Cancel</a>
+
+</form>

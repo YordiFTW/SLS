@@ -1,0 +1,18 @@
+﻿@page "{whiskyId}"
+@model SLS.Pages.Slijterij.DeleteReverseModel
+@{
+    ViewData["Title"] = "DeleteReverse";
+}
+
+<!DOCTYPE html>
+
+
+<h2>ReverseDelete!</h2>
+<div class="alert alert-danger">
+    Are you sure you want to add @Model.Whisky.Name to collection?
+</div>
+<form method="post">
+    <button type="submit" class="btn btn-danger">Yes!</button>
+    <a asp-page="List" class="btn btn-secondary">Cancel</a>
+
+</form>

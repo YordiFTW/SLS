@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using SLS.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace SLS
 {
@@ -23,7 +26,25 @@ namespace SLS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddSession();
+
+            services.AddControllersWithViews();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
+
+            services.AddRazorPages()
+                .AddRazorPagesOptions(confg =>
+                {
+                    confg.Conventions.AuthorizePage("/Slijterij/Secured");
+                });
+
+            services.AddDbContext<SLSDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("SLSDbContext")));
+
+            services.AddScoped<IWhiskyData, SQLWhiskyData>();
+
+            services.AddScoped<ICustomerData, SQLCustomerData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,6 +53,7 @@ namespace SLS
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
             else
             {
@@ -41,14 +63,20 @@ namespace SLS
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSession();
+
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
         }

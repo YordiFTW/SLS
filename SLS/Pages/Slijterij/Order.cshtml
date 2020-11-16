@@ -1,0 +1,57 @@
+﻿@page
+@model SLS.Pages.Slijterij.OrderModel
+@{
+    ViewData["Title"] = "Order";
+}
+
+
+    <h3>Order Info</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Action
+                </th>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Photo
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    SubTotal
+                </th>
+                <th></th>
+            </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MyOrder)
+        {
+        <tr>
+            <td align="center"><a asp-page="order" asp-page-handler="delete" asp-route-id="@item.Whisky.Id">Remove</a></td>
+            <td>@item.Whisky.Id</td>
+            <td><img src="~/images/@item.Whisky.PhotoPath" width="120" asp-append-version="true" /></td>
+            <td>@item.Whisky.Name</td>
+            <td>@item.Whisky.Price</td>
+            <td>@item.Quantity</td>
+            <td>@(item.Whisky.Price * item.Quantity)</td>
+        </tr>
+        }
+        <tr>
+            <td colspan="6" align="right">Total</td>
+            <td>@Model.Total</td>
+        </tr>
+    </table>
+    <br />
+    <a asp-page="list">Doorgaan met winkelen</a>
+    <a style="float:right" asp-page="OrderFinished">Bestelling afronden</a>
+

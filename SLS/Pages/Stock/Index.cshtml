@@ -1,0 +1,57 @@
+﻿@page
+@model SLS.Pages.Stock.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Vooraadlijst</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Whisky[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Whisky[0].Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Whisky[0].Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Whisky[0].Stock)
+            </th>
+            <th>
+                <div>Change Stock</div>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Whisky) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                @Html.TextBoxFor(modelItem => item.Stock)
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

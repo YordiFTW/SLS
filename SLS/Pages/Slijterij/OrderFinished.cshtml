@@ -1,0 +1,88 @@
+﻿@page
+@model SLS.Pages.Slijterij.OrderFinishedModel
+@{
+    ViewData["Title"] = "Order";
+}
+
+
+<h3>Order Info</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Photo
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                SubTotal
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MyOrder)
+        {
+            <tr>
+                <td>@item.Whisky.Id</td>
+                <td><img src="~/images/@item.Whisky.PhotoPath" width="120" asp-append-version="true" /></td>
+                <td>@item.Whisky.Name</td>
+                <td>@item.Whisky.Price</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Whisky.Price * item.Quantity)</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="6" align="right">Total</td>
+            <td>@Model.Total</td>
+        </tr>
+</table>
+<br />
+
+<h4>Customer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="customer.Firstname" class="control-label"></label>
+                <input asp-for="customer.Firstname" class="form-control" />
+                <span asp-validation-for="customer.Firstname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="customer.Middlename" class="control-label"></label>
+                <input asp-for="customer.Middlename" class="form-control" />
+                <span asp-validation-for="customer.Middlename" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="customer.Lastname" class="control-label"></label>
+                <input asp-for="customer.Lastname" class="form-control" />
+                <span asp-validation-for="customer.Lastname" class="text-danger"></span>
+            </div>
+            <!--<div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>-->
+            <div class="form-group">
+                <input style="float:right" type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<a asp-page="Order">Terug</a>
+<!--<a style="float:right" asp-page="OrderCompleted" input type="submit">Bestelling plaatsen</a>-->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

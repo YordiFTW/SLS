@@ -1,0 +1,89 @@
+﻿@using SLS
+@model Whisky
+@{
+    ViewData["Title"] = "Detail";
+    var photoPath = "~/images/" + (Model.PhotoPath ?? "noimage.jpg");
+}
+
+<!--
+<div class="card card-header">
+    <h3>@Model.Name</h3>
+</div>
+
+<div class="card-body">
+    <div>
+        <img class="imageThumbnail" src="@photoPath" asp-append-version="true" />
+    </div>
+    <div>Leeftijd: @Model.Age</div>
+    <div>Locatie: @Model.Location</div>
+    <div>Percentage: @Model.AlcoholPercentage %</div>
+    <div>Type: @Model.Type</div>
+</div>
+
+<div class="card-footer">
+        <a class="btn btn-lg"
+           asp-page="./Detail"
+           asp-route-whiskyId="@Model.Id">
+            <div>🔍</div>
+        </a>
+
+        <a class="btn btn-lg"
+           asp-page="./Edit"
+           asp-route-whiskyId="@Model.Id">
+            <div>📝</div>
+        </a>
+
+        <a class="btn btn-lg"
+           asp-page="./Delete"
+           asp-route-whiskyId="@Model.Id">
+            <div>❌</div>
+        </a>
+</div>
+
+
+<p></p>
+-->
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="@photoPath" alt="Card image cap" asp-append-version="true" />
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text">Leeftijd: @Model.Age</p>
+            <p class="card-text">Locatie: @Model.Location</p>
+            <p class="card-text">Percentage: @Model.AlcoholPercentage %</p>
+            <p class="card-text">Type: @Model.Type</p>
+            <p></p>
+            <a asp-page="order" asp-page-handler="buy" asp-route-id="@Model.Id">Reserveer</a>
+            <div class="card-footer">
+                <a class="btn btn-lg"
+                   asp-page="./Detail"
+                   asp-route-whiskyId="@Model.Id">
+                    <div>🔍</div>
+                </a>
+
+                <a class="btn btn-lg"
+                   asp-page="./Edit"
+                   asp-route-whiskyId="@Model.Id">
+                    <div>📝</div>
+                </a>
+
+                @if (Model.IsDeleted == false)
+                { <a class="btn btn-lg"
+                   asp-page="./Delete"
+                   asp-route-whiskyId="@Model.Id">
+                    <div>❌</div>
+                
+                </a>}
+                else {
+            <a class="btn btn-lg"
+               asp-page="./DeleteReverse"
+               asp-route-whiskyId="@Model.Id">
+                <div>❌</div>
+
+            </a>}
+            </div>
+        </div>
+    </div>
+<p></p>
+
+
+
