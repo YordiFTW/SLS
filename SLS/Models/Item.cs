@@ -12,5 +12,6 @@ namespace SLS.Models
 
         public Customer Customer { get; set; }
         public int Quantity { get; set; }
+
     }
 }

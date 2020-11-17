@@ -99,7 +99,7 @@ namespace SLS.Pages.Slijterij
 
             if (!String.IsNullOrEmpty(SearchType.ToString()))
             {
-                if(!(SearchType == WhiskyType.none))
+                if(!(SearchType == WhiskyType.AlleSoorten))
                 {
                     whiskies = whiskies.Where(x => x.Type == SearchType);
                 }

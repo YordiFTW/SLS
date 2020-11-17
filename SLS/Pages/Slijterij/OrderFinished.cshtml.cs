@@ -107,10 +107,7 @@ namespace SLS.Pages.Slijterij
             {
                 db.Item.Add(item);
             }
-            //for (int i = 0; i < order.Count; i++)
-            //{
-            //    db.Item.Add(order[i]);
-            //}
+
 
             db.Customer.Add(customer);
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,6 +25,8 @@ namespace SLS.Pages.Slijterij
         public Whisky Whisky { get; set; }
         [BindProperty]
         public IFormFile Photo { get; set; }
+
+
         
         public IEnumerable<SelectListItem> Type { get; set; }
 
