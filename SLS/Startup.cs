@@ -45,6 +45,8 @@ namespace SLS
             services.AddScoped<IWhiskyData, SQLWhiskyData>();
 
             services.AddScoped<ICustomerData, SQLCustomerData>();
+
+            services.AddScoped<IItemData, SQLItemData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -40,6 +40,8 @@ namespace SLS
             return db.Customer.Find(id);
         }
 
+
+
         public int GetCountOfCustomer()
         {
             return db.Customer.Count();

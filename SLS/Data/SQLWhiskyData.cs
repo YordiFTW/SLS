@@ -56,6 +56,7 @@ namespace SLS
             return db.Whiskies.Count();
         }
 
+
         public IEnumerable<Whisky> GetWhiskiesByName(string name)
         {
             var query = from r in db.Whiskies

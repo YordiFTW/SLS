@@ -56,7 +56,7 @@ namespace SLS.Pages.Slijterij
                 order = new List<Item>();
                 order.Add(new Item() { 
                         Whisky = whisky,
-                        Quantity = 1
+                        Quantity = 1,
                 });
                 WhiskySessionHelper.SetObjectAsJson(HttpContext.Session, "order", order);
             }
@@ -68,7 +68,7 @@ namespace SLS.Pages.Slijterij
                     order.Add(new Item()
                     {
                         Whisky = whisky,
-                        Quantity = 1
+                        Quantity = 1,
                     });
                 }
                 else
@@ -103,17 +103,19 @@ namespace SLS.Pages.Slijterij
             var order = WhiskySessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "order");
 
 
-            foreach (var item in order)
+            foreach (Item item in order)
             {
+                item.Whisky = db.Whiskies.Find(item.Whisky.Id);
+
                 db.Item.Add(item);
             }
-
+            
 
             db.Customer.Add(customer);
 
             await db.SaveChangesAsync();
 
-            return RedirectToPage("./OrderDetails");
+            return RedirectToPage("./OrderIndex");
         }
     }
 }

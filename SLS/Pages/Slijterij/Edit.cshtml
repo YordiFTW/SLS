@@ -5,7 +5,7 @@
     var photoPath = "~/images/" + (Model.Whisky.PhotoPath ?? "noimage.jpg");
 }
 
-<h2>Editing @Model.Whisky.Name</h2>
+<h2>@Model.Whisky.Name @Model.Message</h2>
 
 <form method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Whisky.Id" />
@@ -24,11 +24,10 @@
         <label asp-for="Whisky.Location"></label>
         <input type="text" list="locations" asp-for="Whisky.Location" class="form-control" />
         <datalist id="locations">
-            <option>Speyside</option>
-            <option>Lowland</option>
-            <option>Highland</option>
-            <option>Campbeltown</option>
-            <option>Islay</option>
+            @foreach(string location in Model.Locations)
+            {
+                <option>@location</option>
+            }
         </datalist>
         <span class="text-danger" asp-validation-for="Whisky.Location"></span>
     </div>

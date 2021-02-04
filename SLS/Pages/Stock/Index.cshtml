@@ -30,6 +30,8 @@
     </thead>
     <tbody>
 @foreach (var item in Model.Whisky) {
+
+
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -42,14 +44,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Stock)
-            </td>
-            <td>
-                @Html.TextBoxFor(modelItem => item.Stock)
-            </td>
-            <td>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
             </td>
         </tr>
 }

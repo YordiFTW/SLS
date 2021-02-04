@@ -46,5 +46,10 @@ namespace SLS
             //modelBuilder.Entity<CustomerOrder>()
                 //.HasKey(c => new { c.CustomerId, c.ItemId });
         }
+
+        internal Item GetById(int itemId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

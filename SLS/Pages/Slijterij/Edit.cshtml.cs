@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using SLS;
 
 namespace SLS.Pages.Slijterij
@@ -19,42 +20,60 @@ namespace SLS.Pages.Slijterij
         private readonly IWhiskyData whiskyData;
         private readonly IHtmlHelper htmlHelper;
         private readonly IWebHostEnvironment webHostEnvironment;
-
+        private readonly SLS.SLSDbContext _context;
 
         [BindProperty]
         public Whisky Whisky { get; set; }
         [BindProperty]
         public IFormFile Photo { get; set; }
 
+        public string Message { get; set; }
 
-        
+        public List<string> Locations { get; set; }
+
+        public string SearchLocation { get; set; }
+
         public IEnumerable<SelectListItem> Type { get; set; }
 
         public EditModel(IWhiskyData whiskyData,
                          IHtmlHelper htmlHelper,
-                         IWebHostEnvironment webHostEnvironment)
+                         IWebHostEnvironment webHostEnvironment,
+                         SLS.SLSDbContext _context)
         {
             this.whiskyData = whiskyData;
             this.htmlHelper = htmlHelper;
             this.webHostEnvironment = webHostEnvironment;
+            this._context = _context;
         }
-        public IActionResult OnGet(int? whiskyId)
+        public async Task OnGetAsync(int? whiskyId, string SearchLocation)
         {
             Type = htmlHelper.GetEnumSelectList<WhiskyType>();
             if(whiskyId.HasValue)
             {
+                Message = "Aanpassen";
                 Whisky = whiskyData.GetById(whiskyId.Value);
             }
             else
             {
+                Message = "Whisky Toevoegen";
                 Whisky = new Whisky();
                 
             }
-            if(Whisky == null)
+
+            IQueryable<string> locationQuery = from m in _context.Whiskies
+                                               orderby m.Location
+                                               select m.Location;
+
+            var whiskies = from m in _context.Whiskies
+                           select m;
+
+            Locations = new List<string>(await locationQuery.Distinct().ToListAsync());
+
+            if (Whisky == null)
             {
-                return RedirectToPage("./NotFound");
+                RedirectToPage("./NotFound");
             }
-            return Page();
+            Page();
         }
 
         public IActionResult OnPost()

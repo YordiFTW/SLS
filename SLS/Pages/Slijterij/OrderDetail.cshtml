@@ -1,0 +1,25 @@
+﻿
+@model SLS.Pages.Slijterij.OrderDetailModel
+@{
+    ViewData["Title"] = "OrderDetail";
+    //var photoPath = "~/images/" + (Model.Whisky.PhotoPath ?? "noimage.jpg");
+}
+
+<div>
+    <!--<img class="imageThumbnail" src="photoPath" asp-append-version="true" />-->
+</div>
+
+<h1>Details</h1>
+
+<h2>@Model.Item.Id</h2>
+<div>Bestelnummer: @Model.Item.Id</div>
+<div>Leeftijd: @Model.Item.Quantity</div>
+<!--<div>Locatie: @Model.Item.Whisky.Location</div>
+<div>Percentage: @Model.Item.Whisky.AlcoholPercentage %</div>
+<div>Type: @Model.Item.Whisky.Type</div>
+<p></p>
+<div>Price: @Model.Item.Whisky.Price</div>
+<div>Stock: @Model.Item.Whisky.Stock</div>
+<p></p>-->
+
+<a asp-page="./List" class="btn btn-secondary">All Restaurants</a>
